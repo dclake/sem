@@ -33,8 +33,10 @@ public class App
                 {
                     // Wait a bit for db to start
                     Thread.sleep(30000);
-                    // Connect to database
-                    con = DriverManager.getConnection("jdbc:mysql://db:3306/employees?useSSL=false", "root", "example");
+                    // Connect to  local database
+                    con = DriverManager.getConnection("jdbc:mysql://localhost:33060/employees?useSSL=false", "root", "example");
+                    // Connect to database inside docker
+                   // con = DriverManager.getConnection("jdbc:mysql://db:3306/employees?useSSL=false", "root", "example");
                     System.out.println("Successfully connected");
                     break;
                 }
@@ -77,9 +79,9 @@ public class App
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT emp_no, first_name, last_name "
-                            + "FROM employees "
-                            + "WHERE emp_no = " + ID;
+                    "SELECT DISTINCT employees.emp_no, employees.first_name, employees.last_name, titles.title "
+                            + "FROM employees, titles "
+                            + "WHERE employees.emp_no = titles.emp_no AND employees.emp_no = " + ID;
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new employee if valid.
@@ -90,11 +92,13 @@ public class App
                 emp.emp_no = rset.getInt("emp_no");
                 emp.first_name = rset.getString("first_name");
                 emp.last_name = rset.getString("last_name");
+                emp.title = rset.getString("title");
                 return emp;
             }
             else
                 return null;
         }
+
         catch (Exception e)
         {
             System.out.println(e.getMessage());
