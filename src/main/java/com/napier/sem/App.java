@@ -37,7 +37,6 @@ public class App
                 Thread.sleep(30000);
                 // Connect to  local database
                 //con = DriverManager.getConnection("jdbc:mysql://localhost:33060/employees?useSSL=false", "root", "example");
-
                 // Connect to database inside docker
                 con = DriverManager.getConnection("jdbc:mysql://db:3306/employees?useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
@@ -203,7 +202,7 @@ public class App
         ArrayList<Employee> employees = a.getAllSalaries();
 
         // Test the size of the returned data - should be 240124
-       // System.out.println(employees.size());
+        System.out.println(employees.size());
 
         a.printSalaries(employees);
 
