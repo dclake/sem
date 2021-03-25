@@ -36,6 +36,6 @@ public class Employee {
     /**
      * Employee's manager
      */
-    public String manager;
+    public Employee manager;
 
 }
