@@ -14,7 +14,7 @@ public class App
     /**
      * Connect to the MySQL database.
      */
-    public void connect()
+    public void connect(String location)
     {
         try
         {
@@ -38,7 +38,7 @@ public class App
                 // Connect to  local database
                 //con = DriverManager.getConnection("jdbc:mysql://localhost:33060/employees?useSSL=false", "root", "example");
                 // Connect to database inside docker
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/employees?useSSL=false", "root", "example");
+                con = DriverManager.getConnection("jdbc:mysql://" + location + "/employees?useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
                 break;
             }
@@ -192,7 +192,7 @@ public class App
         App a = new App();
 
         // Connect to database
-        a.connect();
+        a.connect("localhost:33060");
         // Get Employee
         //Employee emp = a.getEmployee(255530);
         // Display results
