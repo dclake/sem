@@ -2,11 +2,14 @@ import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-class MyTest
-{
+class MyTest {
     @Test
-    void unitTest()
-    {
+    void unitTest() {
         assertEquals(5, 5);
+    }
+
+    @Test
+    void unitTest2() {
+        assertEquals(5, 4);
     }
 }
