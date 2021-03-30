@@ -26,5 +26,11 @@ public class AppTest
         ArrayList<Employee> employess = new ArrayList<Employee>();
         app.printSalaries(employess);
     }
-    
+    @Test
+    void printSalariesTestContainsNull()
+    {
+        ArrayList<Employee> employess = new ArrayList<Employee>();
+        employess.add(null);
+        app.printSalaries(employess);
+    }
 }
